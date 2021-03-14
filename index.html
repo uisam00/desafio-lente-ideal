@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Lente Ideal</title>
+</head>
+<body>
+    <div class="geral">
+        <div class="titulos">
+            <h1 id="titulo">Veja qual é sua Lente ideal</h1>
+            <h2 id="subtitulo">Digite seus dados</h2>
+            <br>
+        </div>
+        <form>
+            <fieldset class="grupo">
+                <div class="campo">
+                    <label for="grauEsfericoOlhoE"><strong>Grau esférico do olho esquerdo</strong></label>
+                    <input type="number" name="grauEsfericoOlhoE" id="grauEsfericoOlhoE" min='-15' max='0' step="0.25" value="0" required>
+                </div>
+    
+                <div class="campo">
+                    <label for="grauEsfericoOlhoD"><strong>Grau esférico do olho direito</strong></label>
+                    <input type="number" name="grauEsfericoOlhoD" id="grauEsfericoOlhoD" min='-15' max='0' step="0.25" value="0" required>
+                </div>
+    
+                <div class="campo">
+                    <label for="grauCilindricoOlhoE"><strong>Grau cilíndrico do olho esquerdo</strong></label>
+                    <input type="number" name="grauCilindricoOlhoE" id="grauCilindricoOlhoE" min='-6' max='0' step="0.25" value="0" required>
+                </div>
+    
+    
+                <div class="campo">
+                    <label for="grauCilindricoOlhoD"><strong>Grau cilíndrico do olho direito</strong></label>
+                    <input type="number" name="grauCilindricoOlhoD" id="grauCilindricoOlhoD" min='-6' max='0' step="0.25" value="0" required>
+                </div>
+            </fieldset>
+            <div id="opcoes"></div>
+            <button class="botao" type="button" onclick="melhorOpcao()">Concluído</button>
+        </form>
+    </div>
+    <script type="text/javascript">
+        
+        function calculoMelhorOpcao() {
+            let grauEsfericoOlhoE = parseFloat(document.getElementById('grauEsfericoOlhoE').value);
+            let grauEsfericoOlhoD = parseFloat(document.getElementById('grauEsfericoOlhoD').value);
+            let grauCilindricoOlhoE = parseFloat(document.getElementById('grauCilindricoOlhoE').value);
+            let grauCilindricoOlhoD = parseFloat(document.getElementById('grauCilindricoOlhoD').value);
+            console.log(grauEsfericoOlhoE);
+            console.log(grauEsfericoOlhoD);
+            console.log(grauCilindricoOlhoE);
+            console.log(grauCilindricoOlhoD);
+            if( 
+                (grauCilindricoOlhoE === 0 && grauCilindricoOlhoD === 0) &&
+                ((grauEsfericoOlhoE >= -12 && grauEsfericoOlhoE <= -3) ||
+                (grauEsfericoOlhoD >= -12 && grauEsfericoOlhoD <= -3))
+                
+             ){
+                return "prime"
+            } else if( 
+                (grauCilindricoOlhoE !== 0 || grauCilindricoOlhoD !== 0) && 
+                (grauCilindricoOlhoE >= -2 && grauCilindricoOlhoD >= -2) &&
+                ((grauEsfericoOlhoE >= -10 && grauEsfericoOlhoE <= -3) ||
+                (grauEsfericoOlhoD >= -10 && grauEsfericoOlhoD <= -3))
+            ){
+                return "prime"
+            } else if(
+                (grauCilindricoOlhoE >= -5 && grauCilindricoOlhoD >= -5) && 
+                ((grauEsfericoOlhoE >= -15 && grauEsfericoOlhoE <= 0) ||
+                (grauEsfericoOlhoD >= -15 && grauEsfericoOlhoD <= 0))
+            ){
+                return "vision"
+            }else{
+                return null
+            }
+        }
+
+        function melhorOpcao(){
+            let opacao = calculoMelhorOpcao()
+            console.log(opacao);
+            if(opacao === 'prime'){
+                document.getElementById('opcoes').innerHTML = 'A melhor opção para você é a lente Prime.'
+            }else if(opacao === 'vision') {
+                document.getElementById('opcoes').innerHTML = 'A melhor opção para você é a lente Vision.'
+            }else{
+                document.getElementById('opcoes').innerHTML = 'Ainda não temos óculos necessario para você.'
+            }   
+        }
+    </script>
+</body>
+</html>
+
